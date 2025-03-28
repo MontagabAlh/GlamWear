@@ -16,7 +16,7 @@ export default function DashboardDropdownMenu() {
                             My Account
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
-                                <LogoutLink>Log out</LogoutLink>
+                                <LogoutLink className='text-red-600'>Log out</LogoutLink>
                             </DropdownMenuItem>
                         </DropdownMenuLabel>
                     </DropdownMenuContent>

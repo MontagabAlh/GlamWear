@@ -9,6 +9,11 @@ export default function OrdersTable() {
         { name: 'Nour Taklet', email: 'sedd@yahoo.com', type: 'book', status: 'Failed', date: '2024-3-19', amount: '$150.00' },
         { name: 'Ahmad Al-Fared', email: 'adee@gmail.com', type: 'Sale', status: 'Successful', date: '2024-2-22', amount: '$50.00' },
         { name: 'Deaa Kaled', email: 'cdd@gmail.com', type: 'book', status: 'Failed', date: '2024-1-29', amount: '$190.00' },
+        { name: 'Deaa Kaled', email: 'cdd@gmail.com', type: 'book', status: 'Failed', date: '2024-1-29', amount: '$190.00' },
+        { name: 'Deaa Kaled', email: 'cdd@gmail.com', type: 'book', status: 'Failed', date: '2024-1-29', amount: '$190.00' },
+        { name: 'Deaa Kaled', email: 'cdd@gmail.com', type: 'book', status: 'Failed', date: '2024-1-29', amount: '$190.00' },
+        { name: 'Deaa Kaled', email: 'cdd@gmail.com', type: 'book', status: 'Failed', date: '2024-1-29', amount: '$190.00' },
+        { name: 'Deaa Kaled', email: 'cdd@gmail.com', type: 'book', status: 'Failed', date: '2024-1-29', amount: '$190.00' },
     ]
     return (
         <Table>

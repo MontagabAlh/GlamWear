@@ -118,21 +118,81 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
+::selection {
+  background-color: var(--foreground); 
+  color: var(--background); 
+}
 
-Button{
+
+::-webkit-scrollbar {
+  width: 12px; 
+}
+
+/* تغيير شكل مسار التمرير */
+::-webkit-scrollbar-track {
+  background: var(--secondary-foreground); /* لون الخلفية */
+}
+
+/* تغيير شكل مقبض التمرير */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-foreground); /* لون المقبض */
+  border-radius: 2px; /* زوايا مستديرة */
+}
+
+/* تغيير شكل المقبض عند التحويم عليه */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent); /* لون أغمق عند التحويم */
+}
+
+
+
+Button , DropdownMenuItem {
   cursor: pointer;
 }
 
 #nprogress .bar {
-  height: 3px; /* سمك الشريط */
+  height: 3px;
+  /* سمك الشريط */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1031;
+}
+
+/* applied to container */
+.ut-button {
+  color: var(--foreground) !important;
+}
+
+/* applied to button */
+.ut-button>*[data-ut-element="button"] {
+  font-size: 1.6rem;
+  color: rgb(0 0 0 / 1);
+  background-color: rgb(239 68 68 / 1);
+}
+
+/* applied to button when uploading */
+.ut-button>*[data-ut-element="button"][data-state="readying"] {
+  background-color: rgb(239 68 68 / 0.5);
+  color: rgb(0 0 0 / 0.5);
+  cursor: not-allowed;
+}
+
+/* applied to the button when uploading */
+.ut-button>*[data-ut-element="button"][data-state="uploading"] {
+  background-color: rgb(239 68 68 / 0.5);
+  color: rgb(0 0 0 / 0.5);
+  cursor: not-allowed;
+}
+
+/* applied to the upload indicator when uploading */
+.ut-button>*[data-ut-element="button"][data-state="uploading"]::after {
+  background-color: rgb(234 88 12 / 1);
 }

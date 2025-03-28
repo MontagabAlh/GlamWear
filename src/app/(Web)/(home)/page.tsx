@@ -3,6 +3,7 @@ import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components
 import Link from "next/link";
 
 export default function page() {
+    
     return (
         <div>
             <Button asChild>

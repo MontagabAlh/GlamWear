@@ -8,6 +8,13 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { Toaster } from "@/components/ui/sonner"
+import { connection } from "next/server";
+import { Suspense } from "react";
+
+async function UTSSR() {
+  await connection();
+  return <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+}
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +35,8 @@ interface LayoutProps {
   children: React.ReactNode;
 };
 
+
+
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <AuthProvider>
@@ -35,22 +44,16 @@ export default function RootLayout({ children }: LayoutProps) {
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <NextSSRPlugin
-          /**
-           * The `extractRouterConfig` will extract **only** the route configs
-           * from the router to prevent additional information from being
-           * leaked to the client. The data passed to the client is the same
-           * as if you were to fetch `/api/uploadthing` directly.
-           */
-          routerConfig={extractRouterConfig(ourFileRouter)}
-        />
+          <Suspense>
+            <UTSSR />
+          </Suspense>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-            <ProgressBar/>
+            <ProgressBar />
             {children}
           </ThemeProvider>
           <Toaster />

@@ -11,7 +11,7 @@ async function getData(productId: string) {
     });
 
     if (!data) {
-        notFound(); // هذا سيعرض صفحة 404
+        notFound(); // يعرض صفحة 404 إذا لم يتم العثور على المنتج
     }
 
     return data;

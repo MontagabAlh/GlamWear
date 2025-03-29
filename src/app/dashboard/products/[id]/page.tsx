@@ -4,17 +4,12 @@ import { notFound } from 'next/navigation';
 import React from 'react';
 
 type EditProductProps = {
-    params: {
-        id: string;
-    };
+    id: string;
 };
 
-async function getData({ params }: EditProductProps) {
-    const productId = params.id;
+async function getData(productId: string) {
     const data = await prisma.product.findUnique({
-        where: {
-            id: productId,
-        },
+        where: { id: productId },
     });
 
     if (!data) {
@@ -25,8 +20,8 @@ async function getData({ params }: EditProductProps) {
     return data;
 }
 
-export default async function EditProduct({ params }: { params: { id: string } }) {
-    const data = await getData({ params });
+export default async function EditProduct({ params }: { params: EditProductProps }) {
+    const data = await getData(params.id);
 
     if (!data) return null; // في حال `notFound` تم استدعاؤه
 

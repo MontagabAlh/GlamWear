@@ -1,9 +1,16 @@
 import EditForm from '@/components/Pages/Admin/products/EditForm';
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-async function getData(productId: string) {
+type EditProductProps = {
+    params: {
+        id: string;
+    };
+};
+
+async function getData({ params }: EditProductProps) {
+    const productId = params.id;
     const data = await prisma.product.findUnique({
         where: {
             id: productId,
@@ -11,14 +18,17 @@ async function getData(productId: string) {
     });
 
     if (!data) {
-        notFound(); // يعرض صفحة 404 إذا لم يتم العثور على المنتج
+        notFound();
+        return null; // تأكد من إيقاف التنفيذ بعد `notFound()`
     }
 
     return data;
 }
 
 export default async function EditProduct({ params }: { params: { id: string } }) {
-    const data = await getData(params.id);
+    const data = await getData({ params });
+
+    if (!data) return null; // في حال `notFound` تم استدعاؤه
 
     return (
         <div>

@@ -40,25 +40,25 @@ interface LayoutProps {
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <AuthProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      <html lang="en" className="light" >
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Suspense>
+          <UTSSR />
+        </Suspense>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          <Suspense>
-            <UTSSR />
-          </Suspense>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <ProgressBar />
-            {children}
-          </ThemeProvider>
-          <Toaster />
-        </body>
-      </html>
-    </AuthProvider>
+          <ProgressBar />
+          {children}
+        </ThemeProvider>
+        <Toaster />
+      </body>
+    </html>
+    </AuthProvider >
   );
 }

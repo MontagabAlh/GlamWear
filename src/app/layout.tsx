@@ -10,6 +10,7 @@ import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { Toaster } from "@/components/ui/sonner"
 import { connection } from "next/server";
 import { Suspense } from "react";
+import Footer from "@/components/Layout/Web/Footer";
 
 async function UTSSR() {
   await connection();
@@ -40,7 +41,7 @@ interface LayoutProps {
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <AuthProvider>
-      <html lang="en" className="light" >
+      <html lang="en" >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -55,8 +56,9 @@ export default function RootLayout({ children }: LayoutProps) {
         >
           <ProgressBar />
           {children}
+          <Footer/>
         </ThemeProvider>
-        <Toaster />
+        <Toaster richColors  />
       </body>
     </html>
     </AuthProvider >

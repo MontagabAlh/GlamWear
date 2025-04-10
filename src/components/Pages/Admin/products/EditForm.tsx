@@ -110,46 +110,46 @@ export default function EditForm({ data }: EditFormProps) {
                             <Switch
                                 key={fields.isFeatured.key}
                                 name={fields.isFeatured.name}
-                                checked={data.isFeatured} />
+                                defaultChecked={data.isFeatured} />
                             <p className='text-red-500 text-xs'>{fields.isFeatured.errors}</p>
                         </div>
                         <div className='flex flex-col md:flex-row justify-between items-center gap-5'>
-                        <div className='flex flex-col gap-3 w-full'>
-                            <Label>Status</Label>
-                            <Select
-                                key={fields.status.key}
-                                name={fields.status.name}
-                                defaultValue={data.status}
-                            >
-                                <SelectTrigger className="w-full">
-                                    <SelectValue placeholder='Select Status' />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value='draft'>Draft</SelectItem>
-                                    <SelectItem value='published'>Published</SelectItem>
-                                    <SelectItem value='archived'>Archived</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <p className='text-red-500 text-xs'>{fields.status.errors}</p>
-                        </div>
-                        <div className='flex flex-col gap-3 w-full'>
-                            <Label>Category</Label>
-                            <Select
-                                key={fields.category.key}
-                                name={fields.category.name}
-                                defaultValue={data.category}
-                            >
-                                <SelectTrigger className="w-full">
-                                    <SelectValue placeholder='Select Status' />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value='men'>men</SelectItem>
-                                    <SelectItem value='women'>Women</SelectItem>
-                                    <SelectItem value='kids'>Kids</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <p className='text-red-500 text-xs'>{fields.category.errors}</p>
-                        </div>
+                            <div className='flex flex-col gap-3 w-full'>
+                                <Label>Status</Label>
+                                <Select
+                                    key={fields.status.key}
+                                    name={fields.status.name}
+                                    defaultValue={data.status}
+                                >
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder='Select Status' />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value='draft'>Draft</SelectItem>
+                                        <SelectItem value='published'>Published</SelectItem>
+                                        <SelectItem value='archived'>Archived</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                <p className='text-red-500 text-xs'>{fields.status.errors}</p>
+                            </div>
+                            <div className='flex flex-col gap-3 w-full'>
+                                <Label>Category</Label>
+                                <Select
+                                    key={fields.category.key}
+                                    name={fields.category.name}
+                                    defaultValue={data.category}
+                                >
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder='Select Status' />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value='men'>men</SelectItem>
+                                        <SelectItem value='women'>Women</SelectItem>
+                                        <SelectItem value='kids'>Kids</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                <p className='text-red-500 text-xs'>{fields.category.errors}</p>
+                            </div>
                         </div>
                         <div className='flex flex-col gap-3'>
                             <Label>Product Image</Label>
@@ -161,16 +161,16 @@ export default function EditForm({ data }: EditFormProps) {
                                 defaultValue={data.images as any} />
                             {images.length < 10 && (
                                 <UploadDropzone
-                                    className=" ut-label:text-lg ut-upload-icon:w-14 cursor-pointer py-4 bg-white dark:bg-[#212121] ut-button:text-background rounded-lg ut-button:bg-foreground ut-button:ut-readying:bg-foreground ut-button:px-4 ut-button:py-2 shadow-sm  ut-button:text-sm ut-button:font-semibold ut-button:shadow-sm !ut-button:hover:bg-primary/90 ut-upload-icon:text-gray-400 text-gray-400 ut-label:text-foreground"
+                                    className=" ut-label:text-lg ut-upload-icon:w-14 cursor-pointer py-4 bg-white dark:bg-[#151515] ut-button:text-background rounded-lg ut-button:bg-foreground ut-button:ut-readying:bg-foreground ut-button:px-4 ut-button:py-2 shadow-sm  ut-button:text-sm ut-button:font-semibold ut-button:shadow-sm !ut-button:hover:bg-primary/90 ut-upload-icon:text-gray-400 text-gray-400 ut-label:text-foreground"
                                     endpoint="imageUploader"
                                     onClientUploadComplete={(res) => {
                                         console.log("Files: ", res);
                                         setImages((prevImages) => [...prevImages, ...res.map((r) => r.url)]);
-                                        toast("Upload Completed")
+                                        toast.success("Upload Completed")
 
                                     }}
                                     onUploadError={(error: Error) => {
-                                        toast(`ERROR! ${error.message}`);
+                                        toast.error(`ERROR! ${error.message}`);
                                     }}
 
                                 />

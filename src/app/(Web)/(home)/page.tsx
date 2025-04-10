@@ -1,22 +1,14 @@
-import { Button } from "@/components/ui/button";
-import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import Link from "next/link";
+import CategorySelection from "@/components/Pages/Web/Home/CategorySelection";
+import FeaturedProducts from "@/components/Pages/Web/Home/FeaturedProducts";
+import Hero from "@/components/Pages/Web/Home/Hero";
 
 export default function page() {
     
     return (
         <div>
-            <Button asChild>
-                <LoginLink>Sign in</LoginLink>
-            </Button>
-            <Button asChild>
-                <RegisterLink>Sign up</RegisterLink>
-            </Button>
-            <Button>
-                <Link href='/dashboard'>
-                    Dashboard
-                </Link>
-            </Button>
+            <Hero/>
+            <CategorySelection/>
+            <FeaturedProducts/>
         </div>
     )
 }

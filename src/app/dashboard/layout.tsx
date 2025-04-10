@@ -7,7 +7,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
 import { ModeToggle } from "@/components/Provider/ModeToggle";
-import DashboardDropdownMenu from "@/components/Layout/Admin/DashboardDropdownMenu";
+import Link from "next/link";
+import StoreDropdownMenu from "@/components/Layout/Web/StoreDropdownMenu";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -26,7 +27,12 @@ export default async function DashboardLayout({ children }: LayoutProps) {
     return (
         <div className="flex w-full flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-background z-50">
-                <nav className="hidden font-medium md:flex md:flex-row md:item-center md:gap-5 md:text-sm lg:gap-6">
+                <nav className="hidden md:flex font-medium md:flex-row md:item-center md:gap-5 md:text-sm lg:gap-6">
+                    <Link href={'/'}>
+                        <h1 className='text-foreground font-bold text-xl lg:text-3xl'>
+                            GlamWear
+                        </h1>
+                    </Link>
                     <Navbar />
                 </nav>
                 <Sheet>
@@ -42,12 +48,12 @@ export default async function DashboardLayout({ children }: LayoutProps) {
                     </SheetContent>
                 </Sheet>
                 <div className="flex flex-row justify-center items-center gap-4">
-                    <DashboardDropdownMenu />
+                    <StoreDropdownMenu />
                     <ModeToggle />
                 </div>
             </header>
             <div className="my-5">
-            {children}
+                {children}
             </div>
         </div>
     );

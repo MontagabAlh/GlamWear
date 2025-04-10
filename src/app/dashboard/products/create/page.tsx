@@ -141,16 +141,16 @@ export default function CreateProduct() {
                 defaultValue={fields.images.initialValue as any} />
               {images.length < 10 && (
                 <UploadDropzone
-                  className=" ut-label:text-lg ut-upload-icon:w-14 cursor-pointer py-4 bg-white dark:bg-[#212121] ut-button:text-background rounded-lg ut-button:bg-foreground ut-button:ut-readying:bg-foreground ut-button:px-4 ut-button:py-2 shadow-sm  ut-button:text-sm ut-button:font-semibold ut-button:shadow-sm !ut-button:hover:bg-primary/90 ut-upload-icon:text-gray-400 text-gray-400 ut-label:text-foreground"
+                  className=" ut-label:text-lg ut-upload-icon:w-14 cursor-pointer py-4 bg-white dark:bg-[#151515] ut-button:text-background rounded-lg ut-button:bg-foreground ut-button:ut-readying:bg-foreground ut-button:px-4 ut-button:py-2 shadow-sm  ut-button:text-sm ut-button:font-semibold ut-button:shadow-sm !ut-button:hover:bg-primary/90 ut-upload-icon:text-gray-400 text-gray-400 ut-label:text-foreground"
                   endpoint="imageUploader"
                   onClientUploadComplete={(res) => {
                     console.log("Files: ", res);
                     setImages((prevImages) => [...prevImages, ...res.map((r) => r.url)]);
-                    toast("Upload Completed")
+                    toast.success("Upload Completed")
 
                   }}
                   onUploadError={(error: Error) => {
-                    toast(`ERROR! ${error.message}`);
+                    toast.error(`ERROR! ${error.message}`);
                   }}
 
                 />
@@ -164,7 +164,7 @@ export default function CreateProduct() {
                         width={100}
                         height={100}
                         alt='Product Image'
-                        className='w-fill h-full object-cover rounded-lg border '
+                        className='w-full h-full object-cover rounded-lg border '
                       />
                       <Button onClick={() => handleDelete(index)} type='button' asChild size='icon' variant='secondary' className='bg-red-500 absolute -top-1 -right-1 cursor-pointer hover:bg-red-400'>
                         <XIcon className='w-5 h-5 ' />

@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
+import { TextAnimate } from '@/components/ui/text-animate'
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -17,7 +18,9 @@ export default function Navbar() {
       <div className='flex flex-col md:flex-row  md:items-center justify-center gap-4 mt-3 md:mt-auto'>
         {DashbordLinks.map((link, index) => (
           <Link key={index} href={link.Link} className={cn(link.Link === pathname ? 'text-foreground bg-muted' : 'text-muted-foreground hover:text-foreground hover:bg-muted ', "transition-all duration-300 ease-in-out group p-2 font-medium rounded-md")}>
-            {link.name}
+            <TextAnimate animation="blurIn" as="p" once={true}>
+              {link.name}
+            </TextAnimate>
           </Link>
         ))}
       </div>

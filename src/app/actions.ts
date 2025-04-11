@@ -213,3 +213,71 @@ export async function additems(productId: string, quantity: number) {
 
     revalidatePath("/", 'layout')
 }
+
+export async function editQuantityItems(productId: string, quantity: number) {
+    const { getUser } = getKindeServerSession()
+    const user = await getUser();
+
+    if (!user) {
+        return redirect('/')
+    }
+
+    // eslint-disable-next-line prefer-const
+    let cart: Cart | null = await redis.get(`cart-${user.id}`)
+
+    const selectedProduct = await prisma.product.findUnique({
+        select: {
+            id: true,
+            name: true,
+            price: true,
+            images: true
+        },
+        where: {
+            id: productId,
+        }
+    })
+
+    if (!selectedProduct) {
+        throw new Error("No Product with this id")
+    }
+    
+    let myCart = {} as Cart
+
+    if (!cart || !cart.items) {
+        myCart = {
+            userId: user.id,
+            items: [
+                {
+                    id: selectedProduct.id,
+                    name: selectedProduct.name,
+                    price: selectedProduct.price,
+                    images: selectedProduct.images[0],
+                    quantity: quantity,
+                }
+            ]
+        }
+    } else {
+        let itemFound = false;
+
+        myCart.items = cart.items.map((item) => {
+            if (item.id === productId) {
+                itemFound = true;
+                item.quantity = quantity
+            }
+            return item
+        })
+
+        if (!itemFound) {
+            myCart.items.push({
+                id: selectedProduct.id,
+                name: selectedProduct.name,
+                price: selectedProduct.price,
+                images: selectedProduct.images[0],
+                quantity: quantity,
+            })
+        }
+    }
+    await redis.set(`cart-${user.id}`, myCart)
+
+    revalidatePath("/", 'layout')
+}

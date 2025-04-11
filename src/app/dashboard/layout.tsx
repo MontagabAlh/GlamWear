@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { ModeToggle } from "@/components/Provider/ModeToggle";
 import Link from "next/link";
 import StoreDropdownMenu from "@/components/Layout/Web/StoreDropdownMenu";
+import { TextAnimate } from "@/components/ui/text-animate";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -30,7 +31,9 @@ export default async function DashboardLayout({ children }: LayoutProps) {
                 <nav className="hidden md:flex font-medium md:flex-row md:item-center md:gap-5 md:text-sm lg:gap-6">
                     <Link href={'/'}>
                         <h1 className='text-foreground font-bold text-xl lg:text-3xl'>
-                            GlamWear
+                            <TextAnimate animation="blurIn" as="h1">
+                                GlamWear
+                            </TextAnimate>
                         </h1>
                     </Link>
                     <Navbar />

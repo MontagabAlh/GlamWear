@@ -143,7 +143,7 @@ export default function EditForm({ data }: EditFormProps) {
                                         <SelectValue placeholder='Select Status' />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value='men'>men</SelectItem>
+                                        <SelectItem value='men'>Men</SelectItem>
                                         <SelectItem value='women'>Women</SelectItem>
                                         <SelectItem value='kids'>Kids</SelectItem>
                                     </SelectContent>

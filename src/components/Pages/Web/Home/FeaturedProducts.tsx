@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma"
-import ProductCard from './ProductCard';
+import ProductCard from '../Shared/ProductCard';
 
 async function GetData() {
     const data = await prisma.product.findMany({

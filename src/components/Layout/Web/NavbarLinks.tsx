@@ -1,5 +1,5 @@
 "use client"
-import { StoreLinks } from '@/components/Menu/Links'
+import { StoreLinks } from '@/utils/Links'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'

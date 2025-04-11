@@ -86,7 +86,7 @@ export default async function ProductsTable() {
                                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                         <DropdownMenuSeparator />
                                         <DropdownMenuItem asChild className='cursor-pointer'>
-                                            <Link href={`/products/${product.id}`}>
+                                            <Link href={`/shop/${product.id}`}>
                                                 View
                                             </Link>
                                         </DropdownMenuItem>

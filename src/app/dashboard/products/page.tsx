@@ -1,4 +1,5 @@
 import ProductsTable from '@/components/Pages/Admin/products/ProductsTable'
+import CustomBreadcrumb from '@/components/Pages/Web/Shared/CustomBreadcrumb'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { PlusCircle } from 'lucide-react'
@@ -8,6 +9,12 @@ import React from 'react'
 export default function products() {
     return (
         <>
+        <CustomBreadcrumb
+                        items={[
+                            { label: "dashboard", href: "/dashboard" },
+                            { label: "products" },
+                        ]}
+                    />
             <div className='flex items-center justify-end'>
                 <Button asChild className='flex items-center gap-x-2'>
                     <Link href='/dashboard/products/create'>

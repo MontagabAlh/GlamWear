@@ -6,10 +6,16 @@ import StoreDropdownMenu from './StoreDropdownMenu'
 import { Button } from '@/components/ui/button'
 import { MenuIcon, ShoppingBagIcon } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { redis } from '@/lib/redis'
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Cart } from '@/lib/interfaces'
 
 
-export default function Navbar() {
-
+export default async function Navbar() {
+    const { getUser } = getKindeServerSession()
+    const user = await getUser();
+    const cart: Cart | null = await redis.get(`cart-${user.id}`)
+    const total = cart?.items.reduce((sum, item) => sum + item.quantity, 0) || 0;
     return (
         <nav className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between sticky top-0  h-16 border-b bg-background z-50'>
             <div className='flex items-center justify-center gap-2'>
@@ -40,7 +46,7 @@ export default function Navbar() {
                     <Link href="/cart" >
                         <ShoppingBagIcon className="h-5 w-5" />
                     </Link>
-                    <span className='absolute -top-2 -right-2 rounded-full min-w-5 min-h-4 bg-foreground text-background flex justify-center items-center'>50</span>
+                    <span className='absolute -top-2 -right-2 rounded-full min-w-5 min-h-4 bg-foreground text-background flex justify-center items-center'>{total}</span>
                 </Button>
                 <ModeToggle />
             </div>

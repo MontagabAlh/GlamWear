@@ -6,6 +6,7 @@ import { bannerSchema, productSchema } from "@/lib/zodSchemas";
 import { prisma } from "@/lib/prisma";
 import { redis } from "@/lib/redis";
 import { Cart } from "@/lib/interfaces";
+import { revalidatePath } from "next/cache";
 
 
 export async function createProduct(prevState: unknown, formData: FormData) {
@@ -208,5 +209,7 @@ export async function additems(productId: string, quantity: number) {
             })
         }
     }
+    await redis.set(`cart-${user.id}`, myCart)
 
+    revalidatePath("/", 'layout')
 }

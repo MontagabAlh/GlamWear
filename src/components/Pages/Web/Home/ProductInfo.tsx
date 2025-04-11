@@ -39,7 +39,7 @@ export default function ProductInfo({ data , isLoggedIn }: ProductInfoProps) {
                 <p className='text-lg  mt-2 text-gray-400'>{data.description}</p>
                 <QuantityInput setQuantity={setQuantity} quantity={quantity} />
             </div>
-            <BuyButtons isLoggedIn={isLoggedIn}/>
+            <BuyButtons isLoggedIn={isLoggedIn} quantity={quantity} productId={data.id}/>
         </div>
     )
 }

@@ -6,8 +6,8 @@ import men from "../../../../../public/men.png"
 import women from "../../../../../public/women.png"
 
 const product = [
-    { image: men, title: 'Product For Men', link: '/products/c/men' },
-    { image: women, title: 'Product For Women', link: '/products/c/women' },
+    { image: men, title: 'Product For Men', link: '/shop/c/men' },
+    { image: women, title: 'Product For Women', link: '/shop/c/women' },
 ]
 
 export default function CategorySelection() {
@@ -15,12 +15,12 @@ export default function CategorySelection() {
         <div className='py-24 sm:py-32'>
             <div className='flex justify-between items-center'>
                 <h2 className='text-2xl font-extrabold tracking-tight'>Shop by Category</h2>
-                <Link href='/products' className='text-sm font-semibold text-primary hover:text-primary/80'>
+                <Link href='/shop' className='hidden md:block text-sm font-semibold text-primary hover:text-primary/80'>
                     Browse All Products &rarr;
                 </Link>
             </div>
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6  lg:gap-8">
-                <Link href='/products' className='group relative aspect-[2.12] md:aspect-[1] rounded-xl overflow-hidden'>
+                <Link href='/shop' className='group relative aspect-[2.12] md:aspect-[1] rounded-xl overflow-hidden'>
                     <Image
                         src={all}
                         alt='product'

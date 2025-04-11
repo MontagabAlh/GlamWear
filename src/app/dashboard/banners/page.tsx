@@ -1,13 +1,20 @@
 import BannerTable from '@/components/Pages/Admin/Banner/BannerTable'
+import CustomBreadcrumb from '@/components/Pages/Web/Shared/CustomBreadcrumb'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { PlusCircle } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-export default function Banner() {
+export default function Banners() {
     return (
         <>
+        <CustomBreadcrumb
+                        items={[
+                            { label: "dashboard", href: "/dashboard" },
+                            { label: "banners" },
+                        ]}
+                    />
             <div className='flex items-center justify-end'>
                 <Button asChild className='flex items-center gap-x-2'>
                     <Link href='/dashboard/banners/create'>

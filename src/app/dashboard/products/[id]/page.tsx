@@ -1,4 +1,5 @@
 import EditForm from '@/components/Pages/Admin/products/EditForm';
+import CustomBreadcrumb from '@/components/Pages/Web/Shared/CustomBreadcrumb';
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 
@@ -22,6 +23,13 @@ export default async function EditProduct({
 
     return (
         <div>
+            <CustomBreadcrumb
+                items={[
+                    { label: "dashboard", href: "/dashboard" },
+                    { label: "products", href: "/dashboard/products" },
+                    { label: `${data.name}` },
+                ]}
+            />
             <EditForm data={data} />
         </div>
     );

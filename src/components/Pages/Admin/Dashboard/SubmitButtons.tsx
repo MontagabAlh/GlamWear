@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { useFormStatus } from 'react-dom'
 
 interface SubmitButtonsProps {
     text: string,
-    variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" 
+    icone?: ReactNode;
+    variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost"
 }
 export default function SubmitButtons({ text, variant }: SubmitButtonsProps) {
     const { pending } = useFormStatus()
@@ -19,6 +20,26 @@ export default function SubmitButtons({ text, variant }: SubmitButtonsProps) {
                 </Button>
             ) : (
                 <Button type='submit' variant={variant ? variant : "default"}>
+                    {text}
+                </Button>
+            )}
+        </>
+    )
+}
+
+export function ShoppinButtons({ text, icone }: SubmitButtonsProps) {
+    const { pending } = useFormStatus()
+
+    return (
+        <>
+            {pending ? (
+                <Button size="lg" className='w-full' disabled type='submit'>
+                    <Loader2 className='w-3 h-3' />
+                    Please Wait
+                </Button>
+            ) : (
+                <Button size="lg" className='w-full'>
+                    {icone}
                     {text}
                 </Button>
             )}

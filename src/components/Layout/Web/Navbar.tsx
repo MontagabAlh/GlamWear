@@ -14,8 +14,10 @@ import { Cart } from '@/lib/interfaces'
 export default async function Navbar() {
     const { getUser } = getKindeServerSession()
     const user = await getUser();
-    const cart: Cart | null = await redis.get(`cart-${user.id}`)
+    const userId = user?.id;
+    const cart: Cart | null = userId ? await redis.get(`cart-${userId}`) : null;
     const total = cart?.items.reduce((sum, item) => sum + item.quantity, 0) || 0;
+
     return (
         <nav className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between sticky top-0  h-16 border-b bg-background z-50'>
             <div className='flex items-center justify-center gap-2'>

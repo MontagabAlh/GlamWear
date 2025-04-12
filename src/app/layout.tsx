@@ -37,7 +37,6 @@ interface LayoutProps {
 };
 
 
-
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <AuthProvider>
@@ -55,7 +54,9 @@ export default function RootLayout({ children }: LayoutProps) {
           disableTransitionOnChange
         >
           <ProgressBar />
+          <div className="min-h-[calc(100vh-64px)] w-full h-full">
           {children}
+          </div>
           <Footer/>
         </ThemeProvider>
         <Toaster richColors  />

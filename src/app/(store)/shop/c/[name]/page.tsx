@@ -3,7 +3,6 @@ import CustomBreadcrumb from "@/components/Pages/Web/Shared/CustomBreadcrumb"
 import { prisma } from "@/lib/prisma"
 import { Category } from "@prisma/client"
 import { Ripple } from "@/components/ui/ripple"
-import { TextAnimate } from "@/components/ui/text-animate"
 
 async function GetData(params: string) {
     const data = await prisma.product.findMany({
@@ -37,9 +36,7 @@ export default async function CategoresPage({ params }: { params: Promise<{ name
             />
             <div className="relative flex h-[250px] md:h-[300px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background">
                 <p className="z-10 whitespace-pre-wrap text-center text-3xl md:text-5xl font-medium tracking-tighter  text-gray-700 dark:text-white capitalize">
-                    <TextAnimate animation="blurIn" as="h1" once={true}>
                         {name}
-                    </TextAnimate>
                 </p>
                 <Ripple />
             </div>

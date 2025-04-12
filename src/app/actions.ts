@@ -240,7 +240,7 @@ export async function editQuantityItems(productId: string, quantity: number) {
     if (!selectedProduct) {
         throw new Error("No Product with this id")
     }
-    
+
     let myCart = {} as Cart
 
     if (!cart || !cart.items) {
@@ -280,4 +280,30 @@ export async function editQuantityItems(productId: string, quantity: number) {
     await redis.set(`cart-${user.id}`, myCart)
 
     revalidatePath("/", 'layout')
+}
+
+export async function removeItemFromCart(productId: string) {
+    const { getUser } = getKindeServerSession()
+    const user = await getUser()
+
+    if (!user) {
+        return redirect('/')
+    }
+
+    const cartKey = `cart-${user.id}`
+    const cart: Cart | null = await redis.get(cartKey)
+
+    if (!cart || !cart.items) {
+        return
+    }
+
+    const updatedItems = cart.items.filter(item => item.id !== productId)
+
+    const updatedCart = {
+        ...cart,
+        items: updatedItems,
+    }
+
+    await redis.set(cartKey, updatedCart)
+    revalidatePath('/', 'layout')
 }

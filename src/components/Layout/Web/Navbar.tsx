@@ -9,7 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { redis } from '@/lib/redis'
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Cart } from '@/lib/interfaces'
-import { TextAnimate } from '@/components/ui/text-animate'
+
 
 
 export default async function Navbar() {
@@ -37,9 +37,9 @@ export default async function Navbar() {
                 <nav className="hidden md:flex font-medium md:flex-row md:item-center md:gap-5 md:text-sm lg:gap-6">
                     <Link href={'/'}>
                         <h1 className='text-foreground font-bold text-xl lg:text-3xl'>
-                            <TextAnimate animation="blurIn" as="h1" once={true}>
-                                GlamWear
-                            </TextAnimate>
+
+                            GlamWear
+
                         </h1>
                     </Link>
                     <NavbarLinks />

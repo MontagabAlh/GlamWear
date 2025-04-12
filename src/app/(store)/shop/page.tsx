@@ -1,7 +1,6 @@
 import CustomBreadcrumb from "@/components/Pages/Web/Shared/CustomBreadcrumb";
 import ProductCard from "@/components/Pages/Web/Shared/ProductCard";
 import { Ripple } from "@/components/ui/ripple";
-import { TextAnimate } from "@/components/ui/text-animate";
 import { prisma } from "@/lib/prisma"
 
 async function GetData() {
@@ -35,9 +34,8 @@ export default async function Products() {
             />
             <div className="relative flex h-[250px] md:h-[300px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background">
                 <p className="z-10 whitespace-pre-wrap text-center text-3xl md:text-5xl font-medium tracking-tighter  text-gray-700 dark:text-white">
-                    <TextAnimate animation="blurIn" as="p" once={true}>
+
                         Shop
-                    </TextAnimate>
                 </p>
                 <Ripple />
             </div>

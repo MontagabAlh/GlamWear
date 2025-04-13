@@ -12,6 +12,7 @@ import DeleteButton from '@/components/Pages/Web/Cart/DeleteButton';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
+import { Checkout } from '@/app/actions';
 
 const calculateTotal = (items: Cart['items']) => {
   return items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
@@ -35,12 +36,12 @@ export default async function cart() {
       />
       <div className="relative flex h-[250px] md:h-[300px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background">
         <p className="z-10 whitespace-pre-wrap text-center text-3xl md:text-5xl font-medium tracking-tighter text-gray-700 dark:text-white">
-            Cart
+          Cart
         </p>
         <Ripple />
       </div>
 
-      <div className="md:max-w-7xl mx-auto mt-10 md:px-4 flex flex-col md:flex-row gap-8">
+      <div className="w-full mt-10  flex flex-col md:flex-row gap-8">
         {cart?.items.length === 0 || cart === null ? (
           <Card className='flex flex-col justify-center items-center gap-3 p-6 w-full'>
             <h1 className="text-2xl text-center w-full">Your cart is empty</h1>
@@ -53,7 +54,6 @@ export default async function cart() {
           </Card>
         ) : (
           <>
-            {/* Items Section */}
             <div className="flex-1 space-y-6">
               {cart.items.map((product, index) => (
                 <div
@@ -86,8 +86,6 @@ export default async function cart() {
                 </div>
               ))}
             </div>
-
-            {/* Order Summary Section */}
             <div className="md:w-96 w-full h-max sticky top-20">
               <Card className="p-6 space-y-4 dark:bg-[#171717] shadow-lg">
                 <h2 className="text-xl font-bold border-b pb-2">Order Summary</h2>
@@ -114,10 +112,14 @@ export default async function cart() {
                       {calculateTotal(cart.items).toFixed(2)}
                     </span>
                   </div>
-
-                  <Button asChild className="w-full mt-6" size="lg">
+                  <form action={Checkout}>
+                    <Button className="w-full mt-6" size="lg">
+                      Proceed to Checkout
+                    </Button>
+                  </form>
+                  {/* <Button asChild className="w-full mt-6" size="lg">
                     <Link href="/checkout">Proceed to Checkout</Link>
-                  </Button>
+                  </Button> */}
                 </div>
               </Card>
             </div>

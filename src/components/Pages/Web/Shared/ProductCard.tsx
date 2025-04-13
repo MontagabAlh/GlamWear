@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
-import { DollarSign } from 'lucide-react';
+import { DollarSign, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -51,7 +51,7 @@ export default function ProductCard({ data }: ProductCardProps) {
                     {data.description}
                 </p>
                 <Button asChild className='w-full mt-5'>
-                    <Link href={`/shop/${data.id}`}>See Details</Link>
+                    <Link href={`/shop/${data.id}`} className='flex items-center justify-center gap-2'><ShoppingBag className='h-4 w-4' /> Shop now</Link>
                 </Button>
             </div>
         </div>

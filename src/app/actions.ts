@@ -7,6 +7,8 @@ import { prisma } from "@/lib/prisma";
 import { redis } from "@/lib/redis";
 import { Cart } from "@/lib/interfaces";
 import { revalidatePath } from "next/cache";
+import Stripe from "stripe";
+import { stripe } from "@/lib/stripe";
 
 
 export async function createProduct(prevState: unknown, formData: FormData) {
@@ -306,4 +308,40 @@ export async function removeItemFromCart(productId: string) {
 
     await redis.set(cartKey, updatedCart)
     revalidatePath('/', 'layout')
+}
+
+
+export async function Checkout() {
+    const { getUser } = getKindeServerSession()
+    const user = await getUser()
+
+    if (!user) {
+        return redirect('/')
+    }
+
+    // eslint-disable-next-line prefer-const
+    let cart: Cart | null = await redis.get(`cart-${user.id}`)
+
+    if (cart && cart.items) {
+
+        const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = cart.items.map((item) => ({
+            price_data: {
+                currency: 'usd',
+                unit_amount: item.price * 100,
+                product_data: {
+                    name: item.name,
+                    images: [item.images]
+                }
+            },
+            quantity: item.quantity
+        }))
+        const session = await stripe.checkout.sessions.create({
+            mode: 'payment',
+            line_items: lineItems,
+            success_url: `https://glam-wear.vercel.app/payment/success`,
+            cancel_url: `https://glam-wear.vercel.app/payment/cancel`,
+        });
+
+        return redirect(session.url as string) 
+    }
 }

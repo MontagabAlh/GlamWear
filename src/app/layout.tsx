@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "@/style/globals.css";
 import { AuthProvider } from "./AuthProvider";
 import { ThemeProvider } from "@/components/Provider/theme-provider";
@@ -22,13 +22,18 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
+// const winkySans = Winky_Sans({
+//   variable: "--font-winky-sans",
+//   weight: ['300', '400', '500', '600', '700', '800', '900'],
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
-  title: "Shoe Marshal",
+  title: "Glam Wear",
   description: "A shoe store",
 };
 
@@ -36,32 +41,33 @@ interface LayoutProps {
   children: React.ReactNode;
 };
 
-
+// ${winkySans.variable}
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <AuthProvider>
-      <html lang="en" >
+
+    <html lang="en" >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} antialiased`}
       >
-        <Suspense>
-          <UTSSR />
-        </Suspense>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ProgressBar />
-          <div className="min-h-[calc(100vh-64px)] w-full h-full">
-          {children}
-          </div>
-          <Footer/>
-        </ThemeProvider>
-        <Toaster richColors  />
+        <AuthProvider>
+          <Suspense>
+            <UTSSR />
+          </Suspense>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ProgressBar />
+            <div className="min-h-[calc(100vh-64px)] w-full h-full">
+              {children}
+            </div>
+            <Footer />
+          </ThemeProvider>
+          <Toaster richColors />
+        </AuthProvider>
       </body>
     </html>
-    </AuthProvider >
   );
 }
